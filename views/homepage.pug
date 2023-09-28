@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+  head
+    title= `${title}` 
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Players
+    table
+      tr
+        th Name
+        th Position
+        th College
+        th NFL Team
+      each player in data
+        tr
+          td #{player.properties.player_name}
+          td #{player.properties.position}
+          td #{player.properties.college}
+          td #{player.properties.team}
