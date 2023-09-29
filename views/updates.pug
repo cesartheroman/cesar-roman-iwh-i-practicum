@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+    head
+        title= `${title}`
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 #{title}
+
+        a(href="/") Return to the homepage 
+
+        .form-wrapper
+            form(method="POST")
+                label(for="name") Name
+                input(type="text" name="name" required)
+
+                label(for="position") Position
+                input(type="text" name="position" required)
+
+                label(for="college") College 
+                input(type="text" name="college" required)
+
+                label(for="team") Team
+                input(type="text" name="team" required)
+
+                button(type='submit') Submit

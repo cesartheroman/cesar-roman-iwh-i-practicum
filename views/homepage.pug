@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    title= `${title}` 
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Custom Object Table
+
+    a(href="/update-cobj") Add/Update this table    
+
+    table
+      tr
+        th Name
+        th Position
+        th College
+        th NFL Team
+      each player in data
+        tr
+          td #{player.properties.name}
+          td #{player.properties.position}
+          td #{player.properties.college}
+          td #{player.properties.team}
+          td 
+            a(href=`/update-cobj?playerId=${player.properties.hs_object_id}`) Update Player Info
