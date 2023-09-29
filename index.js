@@ -22,9 +22,9 @@ app.get('/', async (req, res) => {
   try {
     const response = await axios.get(customObjs, { headers });
     const data = response.data.results;
-    // res.json(data)
+
     res.render('homepage', {title: "Players | Cesar's Practicum", data})
-  } catch (error) {
+  } catch (error) {   
     console.error(error) 
   }
 
@@ -34,7 +34,7 @@ app.get('/', async (req, res) => {
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 app.get('/update-cobj', async (req, res) => {
-
+  res.render('updates', {title: "Update Custom Object Form | Integrating with HubSpot I Practicum"})
 })
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
