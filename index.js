@@ -62,7 +62,7 @@ app.post('/update-cobj', async (req, res) => {
       await axios.patch(updatePlayer, body, {headers})
     } else {
       const createPlayer = `${BASE_URL}/crm/v3/objects/${objectType}/`
-      await axios.post(creatPlayer, body, {headers})
+      await axios.post(createPlayer, body, {headers})
     } 
   } catch (error) {
     console.error(error)  
