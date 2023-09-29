@@ -16,7 +16,9 @@ html(lang="en")
         th NFL Team
       each player in data
         tr
-          td #{player.properties.player_name}
+          td #{player.properties.name}
           td #{player.properties.position}
           td #{player.properties.college}
           td #{player.properties.team}
+          td 
+            a(href=`/update-cobj?playerId=${player.properties.hs_object_id}`) Update Player Info

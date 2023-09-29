@@ -10,12 +10,12 @@ app.use(express.json());
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal acccucc.
 const PRIVATE_APP_ACCESS = "pat-na1-61a47881-66e7-4fa2-88a6-5dacbc51c360";
 const BASE_URL = 'https://api.hubapi.com';
-const objectType = 'players'
+const objectType = 'p43972018_nfl_players';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get('/', async (req, res) => {
-  const customObjs = `${BASE_URL}/crm/v3/objects/${objectType}?limit=10&properties=player_name&properties=college&properties=position&properties=team&archived=false`;
+  const customObjs = `${BASE_URL}/crm/v3/objects/${objectType}?limit=10&properties=name&properties=college&properties=position&properties=team&archived=false`;
   const headers = {
     Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
     'Content-Type': 'application/json'
@@ -42,26 +42,37 @@ app.get('/update-cobj', async (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 app.post('/update-cobj', async (req, res) => {
+  const playerId = req.query.playerId;
   const body = {
     properties: {
-      'player_name': req.body.playerName,
+      'name': req.body.name,
       'position': req.body.position,
       'college': req.body.college,
       'team': req.body.team
     }
   };
-  const updatePlayer = `${BASE_URL}/crm/v3/objects/${objectType}`;
   const headers = {
     Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
     'Content-Type': 'application/json'
   }
-  
-  try {
-    await axios.post(updatePlayer, body, {headers})
-    res.redirect('/')
-  } catch (error) {
-    
+
+  if(playerId) {
+    try {
+      const updatePlayer = `${BASE_URL}/crm/v3/objects/${objectType}/${playerId}`;
+      await axios.patch(updatePlayer, body, {headers})
+    } catch (error) {
+      console.error(error)  
+    }
+  } else {
+    try {
+      const updatePlayer = `${BASE_URL}/crm/v3/objects/${objectType}/`
+      await axios.post(updatePlayer, body, {headers})
+    } catch (error) {
+      console.error(error)
+    }
   }
+
+  res.redirect('/')
 })
 
 /**
